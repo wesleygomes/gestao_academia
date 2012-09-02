@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/interna.xhtml">
+
+	<ui:define name="titulo">
+    	Cadastro de Usuários
+	</ui:define>
+
+	<ui:define name="corpo">
+	<h:form id="cadastro">
+		<h:messages />
+		<h:inputHidden value="#{usuarioBean.usuario.codigo}" />
+		<h:inputHidden value="#{usuarioBean.usuario.ativo}" />
+		
+		<h:panelGrid columns="3">
+			<h:outputLabel value="Nome:" for="nome" />
+			<h:inputText id="nome" label="Nome" value="#{usuarioBean.usuario.nome}" size="30" maxlength="30" required="true" requiredMessage="Digite seu nome">
+			<f:validateLength minimum="10" maximum="30" /></h:inputText>
+			<h:message errorStyle="color:red; display:block" for="nome"></h:message>
+			
+			<h:outputLabel value="Data Nascimento:" for="data" />
+			<h:inputText id="data" label="Data Nascimento" value="#{usuarioBean.usuario.nascimento}" size="10" maxlength="10" required="true" requiredMessage="Digite sua data de nascimento">
+			<f:convertDateTime dateStyle="medium" /></h:inputText>
+			<h:message errorStyle="color:red; display:block" for="data"></h:message>
+
+			<h:outputLabel value="Celular:" for="celular" />
+			<h:inputText id="celular" label="Celular" value="#{usuarioBean.usuario.celular}" size="10" /> 
+			<h:message for="celular"></h:message>
+			
+			<h:outputLabel value="E-mail:" for="email" />
+			<h:inputText id="email" label="e-Mail" value="#{usuarioBean.usuario.email}" size="50" maxlength="50" required="true" requiredMessage="e-mail inválido">
+			<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" /></h:inputText>
+			<h:message errorStyle="color:red; display:block" for="email" ></h:message>
+			
+			<h:outputLabel value="Sexo:" for="sexo" />
+			<h:selectOneMenu id="sexo" value="#{usuarioBean.usuario.sexo}">
+				<f:selectItem itemValue="M" itemLabel="Masculino" />
+				<f:selectItem itemValue="F" itemLabel="Feminino" />
+			</h:selectOneMenu>
+			</h:panelGrid>
+
+			<h:panelGrid columns="3">
+			<h:outputLabel value="Login:" for="login" />
+			<h:inputText id="login" label="Login" value="#{usuarioBean.usuario.login}" size="15" maxlength="15" required="true" requiredMessage="Login deve ter no mínimo 5 e no máximo 15 caracters">
+			<f:validateRegex pattern="([a-z]|[0-9]|[.]|[_]){5,15}" /></h:inputText>
+			<h:message errorStyle="color:red; display:block" for="login" ></h:message>
+			
+			<h:outputText value="Senha:" for="senha"></h:outputText>
+			<h:inputSecret id="senha" label="Senha" value="#{usuarioBean.usuario.senha}" size="10" maxlength="10" required="true" redisplay="true" requiredMessage="Digite sua senha."></h:inputSecret>
+			<h:message errorStyle="color:red; display:block" for="senha"></h:message>
+			
+			<h:outputLabel value="Confirmar Senha:" for="confirmarsenha" />
+			<h:inputSecret id="confirmarsenha" label="Confirmar Senha" value="#{usuarioBean.confirmarSenha}" size="10" maxlength="10" redisplay="true" required="true" requiredMessage="Confirme senha" />
+			<h:message errorStyle="color:red; display:block" for="confirmarsenha"></h:message>
+			
+		</h:panelGrid>
+		
+		<h:commandButton action="#{usuarioBean.salvar}" value="Salvar" />
+	</h:form>
+		</ui:define>
+</ui:composition>
+</html>
